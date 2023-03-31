@@ -1,8 +1,5 @@
-ALX project
-create our __own__ **printf** 
-
-# printf
-```printf``` is a custom implementation of the C programming function ```printf```. This project is an application of the C programming knowledge.
+# _printf
+```_printf``` is a custom implementation of the C programming function ```printf```. This project is an application of the C programming knowledge that ALX AFRICA cohort 8 students have learned since starting the program on JUNE 6th, 2022.
 
 **Prototype:** ```int _printf(const char *, ...);```
 
@@ -24,7 +21,7 @@ create our __own__ **printf**
 * Output:  ```1000```
 ## Project Requirements
 * All files will be compiled on Ubuntu 14.04 LTS
-* Programs and functions will be compiled with gcc 4.8.4 using flags -Wall -Werror -Wextra and -pedantic compiler
+* Programs and functions will be compiled with gcc 4.8.4 using flags -Wall -Werror -Wextra and -pedantic
 * Code must follow the [Betty](https://github.com/holbertonschool/Betty/wiki) style
 * Global variables are not allowed
 * Authorized functions and macros:
@@ -37,20 +34,19 @@ create our __own__ **printf**
   * ```va_arg``` (man 3 va_arg)
 ## Mandatory Tasks
 - [x] Write function that produces output with conversion specifiers ```c```, ```s```, and ```%```.
-- [x] Handle conversion specifiers. ```d```, ```i```.
+- [x] Handle conversion specifiers ```d```, ```i```.
 - [x] Create a man page for your function.
 ## Advanced Tasks
 - [x] Handle conversion specifier ```b```.
 - [x] Handle conversion specifiers ```u```, ```o```, ```x```, ```X```.
-[x] Use a local buffer of 1024 chars in order to call write as little as possible.
+- [ ] Use a local buffer of 1024 chars in order to call write as little as possible.
 - [x] Handle conversion specifier ```S```.
 - [x] Handle conversion specifier ```p```.
 - [ ] Handle flag characters ```+```, space, and ```#``` for non-custom conversion specifiers.
 - [ ] Handle length modifiers ```l``` and ```h``` for non-custom conversion specifiers.
 - [ ] Handle the field width for non-custom conversion specifiers.
 - [ ] Handle the precision for non-custom conversion specifiers.
-- [ ] Handle the ```0``` flag character for non-custom conversion specifiers.![163788643-5275226b-c1e7-4326-b96e-12092bb09f54](https://user-images.githubusercontent.com/94393557/164071978-cb18dbd8-cd6b-41a1-9a28-0494fa3cd199.png)
-
+- [ ] Handle the ```0``` flag character for non-custom conversion specifiers.
 - [x] Handle the custom conversion specifier ```r``` that prints the reversed string.
 - [x] Handle the custom conversion specifier ```R``` that prints the rot13'ed string.
 - [ ] All above options should work well together.
@@ -63,4 +59,6 @@ create our __own__ **printf**
 * **print_numbers.c:** - contains the functions ```print_i``` and ```print_d```, which handle the conversion specifiers ```i``` and ```d```, respectively
 * **print_hex.c:** - contains the functions ```print_hex```, which prints an unsigned int in hexidecimal form, ```print_x```, ```print_X```, and ```print_p```, which handle the conversion specifiers ```x```, ```X```, and ```p```, respectively
 * **print_unsigned_int.c:** - contains the functions ```print_u```, ```print_o```, and ```print_b```, which handle the conversion specifiers ```u```, ```o```, and ```b```, respectively
-* **print_rot13.c** - contains the function ```print_R```, which handles the conversion specifier ```R`
+* **print_rot13.c** - contains the function ```print_R```, which handles the conversion specifier ```R```
+## Authors
+

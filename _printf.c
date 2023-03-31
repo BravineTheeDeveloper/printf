@@ -1,99 +1,82 @@
 #include "main.h"
-/**
- * print_format - format controller
- * @format: the base string
- * @valist : hold the argument passed
- * Return: total size of the argument with the total size of the base string
- */
-int print_format(const char *format, va_list valist)
-{
-	unsigned int count = 0;
-	int result;
-	int i = 0;
-
-	for (i = 0; format[i]; i++)
-	{
-		if (format[i] == '%')
-		{
-			result = formatchecker(format, valist, &i);
-			if (result == -1)
-			{
-				return (-1);
-			}
-		count += result;
-		continue;
-		}
-	print_out(format[i]);
-	count++;
-	}
-	return (count);
-}
+#include <stdlib.h>
 
 /**
- * formatchecker - checks the format and print the character
- * @str: the base string
- * @valist: number of arguments passed
- * @j: address of %
- * Return: total number of printed charcter inside the argument
+ * check_for_specifiers - checks if there is a valid format specifier
+ * @format: possible format specifier
+ *
+ * Return: pointer to valid function or NULL
  */
-int formatchecker(const char *str, va_list valist, int *j)
+static int (*check_for_specifiers(const char *format))(va_list)
 {
-	int i;
-	int p;
-	int formats;
+	unsigned int i;
+	print_t p[] = {
+		{"c", print_c},
+		{"s", print_s},
+		{"i", print_i},
+		{"d", print_d},
+		{"u", print_u},
+		{"b", print_b},
+		{"o", print_o},
+		{"x", print_x},
+		{"X", print_X},
+		{"p", print_p},
+		{"S", print_S},
+		{"r", print_r},
+		{"R", print_R},
+		{NULL, NULL}
+	};
 
-	Data checker[] = {{'c', print_char},
-			  {'s', print_string},
-			  {'d', print_int},
-			  {'i', print_int},
-			  {'b', print_binary},
-			  {'u', print_unsigned},
-			  {'o', print_octal},
-			  {'x', print_hex},
-			  {'X', print_hex_big},
-			  {'S', print_bigS},
-			  {'p', print_address},
-			  {'R', print_rot13}};
-	*j = *j + 1;
-	if (str[*j] == '\0')
+	for (i = 0; p[i].t != NULL; i++)
 	{
-		return (-1);
-	}
-	if (str[*j] == '%')
-	{
-		print_out('%');
-		return (1);
-	}
-	formats = sizeof(checker) / sizeof(checker[0]);
-	for (i = 0; i < formats; i++)
-	{
-		if (str[*j] == checker[i].l)
+		if (*(p[i].t) == *format)
 		{
-			p = checker[i].ptr(valist);
-			return (p);
+			break;
 		}
 	}
-	print_out('%'), print_out(str[*j]);
-	return (2);
+	return (p[i].f);
 }
 
 /**
  * _printf - prints anything
- * @format: list of argument type passed
- * Return: number of character printed
+ * @format: list of argument types passed to the function
+ *
+ * Return: number of characters printed
  */
 int _printf(const char *format, ...)
 {
-	va_list ag;
-	int f;
+	unsigned int i = 0, count = 0;
+	va_list valist;
+	int (*f)(va_list);
 
 	if (format == NULL)
-	{
 		return (-1);
+	va_start(valist, format);
+	while (format[i])
+	{
+		for (; format[i] != '%' && format[i]; i++)
+		{
+			_putchar(format[i]);
+			count++;
+		}
+		if (!format[i])
+			return (count);
+		f = check_for_specifiers(&format[i + 1]);
+		if (f != NULL)
+		{
+			count += f(valist);
+			i += 2;
+			continue;
+		}
+		if (!format[i + 1])
+			return (-1);
+		_putchar(format[i]);
+		count++;
+		if (format[i + 1] == '%')
+			i += 2;
+		else
+			i++;
 	}
-	va_start(ag, format);
-	f = print_format(format, ag);
-	print_out(-1);
-	va_end(ag);
-	return (f);
+	va_end(valist);
+	return (count);
 }
